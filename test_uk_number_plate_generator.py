@@ -8,7 +8,8 @@ from uk_number_plate_generator import UKNumberPlateGenerator
 @pytest.mark.parametrize("datetime, expected_year_code", [
     (datetime(year = 2010, month = 4, day = 3), "10"),
     (datetime(year = 2001, month = 9, day = 25), "51"),
-    (datetime(year = 2007, month = 3, day = 1), "07")
+    (datetime(year = 2007, month = 3, day = 1), "07"),
+    (datetime(year = 2003, month = 2, day = 12), "52")
 ])
 def test_generate_age_identifier(datetime, expected_year_code):
     assert UKNumberPlateGenerator('plates.csv').generate_age_identifier(datetime) == expected_year_code
@@ -38,7 +39,7 @@ def test_generate_available_random_string_raises_error():
 
 @pytest.mark.parametrize("dvla_memory_tag, date_created_str, random_start_index, existing_plates, expected_generated_plate, expected_end_plate_set", [
     ("YR", "03/11/2017", 5, set(), "YR67 AAF", {"YR67 AAF"}),
-    ("ER", "08/01/2009", 0, {"ER59 AAA", "ER59 AAB"}, "ER59 AAC", {"ER59 AAA", "ER59 AAB", "ER59 AAC"}),
+    ("ER", "08/01/2009", 0, {"ER58 AAA", "ER58 AAB"}, "ER58 AAC", {"ER58 AAA", "ER58 AAB", "ER58 AAC"}),
     ("GH", "06/07/2021", 645, set(), "GH21 BFB", {"GH21 BFB"}),
 ])    
 def test_generate_numberplate(dvla_memory_tag, date_created_str, random_start_index, existing_plates, expected_generated_plate, expected_end_plate_set):

@@ -119,6 +119,9 @@ class UKNumberPlateGenerator:
         # cars manufactured from march to august use their year, otherwise, add 50
         if 3 <= month <= 8:
             return str(year)[-2:]
+        
+        if month < 3:
+            year -= 1 # account for overlap of vehicle year to normal year
         return str(year + 50)[-2:]
     
     
